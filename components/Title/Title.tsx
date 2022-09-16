@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from "next/head";
 
 type PropTypes = {
   title: string;
@@ -7,7 +7,7 @@ type PropTypes = {
 const Title = ({ title }: PropTypes) => {
   return (
     <Head>
-      <title>Bitoron | {title}</title>
+      <title>erthasys | {title}</title>
     </Head>
   );
 };
