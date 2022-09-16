@@ -31,7 +31,6 @@ const SubmitProgram = () => {
       <Container maxW="container.xl" mt={10}>
         <Flex gap="5" flexWrap={["wrap-reverse"]}>
           <Box flex="1">
-            <Profile />
             <NavigationMenu />
             <HashTags />
             <Footer />
