@@ -77,7 +77,7 @@ const TenderProposal = () => {
           </Box>
           <SimpleGrid columns={[1, 3]} gap={6} mt={6}>
             {programs.map((program) => (
-              <Link href={`proposal-details/${program.id}`} key={program.id}>
+              <Link href={`program-details/${program.id}`} key={program.id}>
                 <a>
                   <ProposalCard />
                 </a>
