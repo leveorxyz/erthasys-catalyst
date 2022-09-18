@@ -89,11 +89,24 @@ const Header = () => {
                 </InputGroup>
 
                 <Avatar name="User" src="/images/user-avatar.png" />
-                <Link href="/">
-                  <a>
-                    <Button background="brand.100">Log out</Button>
-                  </a>
-                </Link>
+                {localStorage.getItem("user") ? (
+                  <Link href="/">
+                    <a>
+                      <Button
+                        background="brand.100"
+                        onClick={() => localStorage.clear()}
+                      >
+                        Log out
+                      </Button>
+                    </a>
+                  </Link>
+                ) : (
+                  <Link href="/login">
+                    <a>
+                      <Button background="brand.100">Log in</Button>
+                    </a>
+                  </Link>
+                )}
               </HStack>
             )}
             {isMobile && (
