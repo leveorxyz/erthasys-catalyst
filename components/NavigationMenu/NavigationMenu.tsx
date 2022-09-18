@@ -5,38 +5,28 @@ import {
   RiHome3Fill,
   RiFileList3Fill,
   RiCalendarFill,
-  RiFileDownloadFill,
   RiBookmark3Fill,
-  RiFileEditFill,
   RiSettings4Fill,
   RiUser3Fill,
 } from "react-icons/ri";
 
 const navItems = [
-  { id: 1, title: "হোম পেইজ", icon: RiHome3Fill, link: "/" },
+  { id: 1, title: "Home", icon: RiHome3Fill, link: "/" },
   {
     id: 2,
-    title: "সকল প্রক্রিউরমেন্ট",
+    title: "Program",
     icon: RiFileList3Fill,
-    link: "/procurements",
-  },
-  { id: 3, title: "দিন পঞ্জিকা", icon: RiCalendarFill, link: "/calendar" },
-  {
-    id: 4,
-    title: "ক্রয় পর্যবেক্ষণ",
-    icon: RiFileEditFill,
-    link: "/monitoring",
+    link: "/all-programs",
   },
   {
-    id: 5,
-    title: "ডাটা ডাউনলোড",
-    icon: RiFileDownloadFill,
-    link: "#!",
-    isNew: true,
+    id: 3,
+    title: "Submit Program",
+    icon: RiCalendarFill,
+    link: "/submit-program",
   },
-  { id: 6, title: "প্রকাশনা", icon: RiBookmark3Fill, link: "#!" },
-  { id: 7, title: "প্রোফাইল", icon: RiUser3Fill, link: "#!" },
-  { id: 8, title: "সেটিংস", icon: RiSettings4Fill, link: "#!" },
+  { id: 4, title: "Publications", icon: RiBookmark3Fill, link: "#!" },
+  { id: 5, title: "Profile", icon: RiUser3Fill, link: "#!" },
+  { id: 6, title: "Settings", icon: RiSettings4Fill, link: "#!" },
 ];
 
 const NavigationMenu = () => {

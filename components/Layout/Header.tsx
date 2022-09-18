@@ -1,6 +1,6 @@
-import { useEffect, useState, useMemo } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useEffect, useState, useMemo } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   Avatar,
   Box,
@@ -15,21 +15,21 @@ import {
   useMediaQuery,
   HStack,
   Container,
-} from '@chakra-ui/react';
-import { IoMenu } from 'react-icons/io5';
-import { RiSearchFill } from 'react-icons/ri';
-import MobileDrawer from './MobileDrawer';
-import DashboardSidebar from './DashboardSidebar';
+} from "@chakra-ui/react";
+import { IoMenu } from "react-icons/io5";
+import { RiSearchFill } from "react-icons/ri";
+import MobileDrawer from "./MobileDrawer";
+import DashboardSidebar from "./DashboardSidebar";
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [mediaQuery] = useMediaQuery('(max-width: 991px)');
+  const [mediaQuery] = useMediaQuery("(max-width: 991px)");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const sidebar = useDisclosure();
   const router = useRouter();
 
   const isDashboard = useMemo(() => {
-    const paths = ['/dashboard', '/proposal-details'];
+    const paths = ["/dashboard", "/proposal-details"];
     return paths.includes(router.pathname);
   }, [router.pathname]);
 
@@ -73,11 +73,15 @@ const Header = () => {
               <HStack gap={10}>
                 <InputGroup width="400px">
                   <InputRightElement pointerEvents="none">
-                    <Icon as={RiSearchFill} color="dark.100" fontWeight="bold" />
+                    <Icon
+                      as={RiSearchFill}
+                      color="dark.100"
+                      fontWeight="bold"
+                    />
                   </InputRightElement>
                   <Input
                     type="search"
-                    placeholder="এখানে সার্চ করুন"
+                    placeholder="Search"
                     background="offwhite.100"
                     borderRadius="10"
                     border="none"
@@ -87,7 +91,7 @@ const Header = () => {
                 <Avatar name="User" src="/images/user-avatar.png" />
                 <Link href="/">
                   <a>
-                    <Button background="red.100">লগ আউট করুন</Button>
+                    <Button background="brand.100">Log out</Button>
                   </a>
                 </Link>
               </HStack>
@@ -98,7 +102,11 @@ const Header = () => {
               </Button>
             )}
           </Flex>
-          <MobileDrawer onClose={onClose} isOpen={isOpen} isDashboard={isDashboard} />
+          <MobileDrawer
+            onClose={onClose}
+            isOpen={isOpen}
+            isDashboard={isDashboard}
+          />
           <DashboardSidebar onClose={sidebar.onClose} isOpen={sidebar.isOpen} />
         </Box>
       </Container>
