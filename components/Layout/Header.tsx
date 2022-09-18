@@ -40,6 +40,14 @@ const Header = () => {
     // eslint-disable-next-line
   }, [mediaQuery]);
 
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    console.log(user);
+  }, []);
+
+  const user =
+    typeof window !== "undefined" ? localStorage.getItem("user") : null;
+
   return (
     <Box py={4} bg="white" pos="fixed" width="100%" zIndex={10}>
       <Container maxW="container.xl">
@@ -64,7 +72,7 @@ const Header = () => {
             <Box>
               <Link href="/">
                 <a>
-                  <Image src="/images/logo.png" alt="Shushashon" />
+                  <Image src="/images/logo.png" alt="Erthasys" />
                 </a>
               </Link>
             </Box>
@@ -89,11 +97,33 @@ const Header = () => {
                 </InputGroup>
 
                 <Avatar name="User" src="/images/user-avatar.png" />
-                <Link href="/">
-                  <a>
-                    <Button background="brand.100">Log out</Button>
-                  </a>
-                </Link>
+                {user ? (
+                  <Button
+                    background="brand.100"
+                    onClick={() => {
+                      window.localStorage.clear();
+                      router.push("/");
+                    }}
+                    _hover={{
+                      backgroundColor: "green.100",
+                    }}
+                  >
+                    Log out
+                  </Button>
+                ) : (
+                  <Link href="/login">
+                    <a>
+                      <Button
+                        _hover={{
+                          backgroundColor: "green.100",
+                        }}
+                        background="brand.100"
+                      >
+                        Login
+                      </Button>
+                    </a>
+                  </Link>
+                )}
               </HStack>
             )}
             {isMobile && (

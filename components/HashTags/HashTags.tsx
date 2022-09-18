@@ -1,14 +1,14 @@
-import { Box, Divider, Flex, Heading } from "@chakra-ui/react";
-import Tag from "./Tag";
+import { Box, Divider, Flex, Heading } from '@chakra-ui/react';
+import Tag from './Tag';
 
 const tags = [
-  { id: 1, name: "work" },
-  { id: 2, name: "business" },
-  { id: 3, name: "hr" },
-  { id: 4, name: "tender" },
-  { id: 5, name: "proposal" },
-  { id: 6, name: "procurement" },
-  { id: 7, name: "latest" },
+  { id: 1, name: 'carbon' },
+  { id: 2, name: 'emission' },
+  { id: 3, name: 'blockchain' },
+  { id: 4, name: 'traceability' },
+  { id: 5, name: 'footprint' },
+  { id: 6, name: 'carbon credit' },
+  { id: 7, name: 'crypto' },
 ];
 
 const HashTags = () => {
