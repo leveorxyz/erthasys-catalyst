@@ -20,7 +20,7 @@ const ProposalFilter = () => {
         >
           <Box pos="relative" textAlign="center">
             <Icon as={RiArrowLeftSFill} pos="absolute" left={5} />
-            <Heading size="sm">এডভান্স সার্চ</Heading>
+            <Heading size="sm">Advance Search</Heading>
           </Box>
         </Box>
         {/* <FormInput placeholder="মিনিস্ট্রি / ডিভিশন" icon={RiSearchFill} />
@@ -34,7 +34,7 @@ const ProposalFilter = () => {
         <FormInput placeholder="ক্যাটাগরি বাছাই করুণ" icon={RiArrowDownSFill} />
         <FormInput placeholder="প্রোকিউরমেন্ট মেথড" icon={RiArrowDownSFill} /> */}
         <Button background="red.100" isFullWidth>
-          সার্চ করুন
+          Search
         </Button>
       </VStack>
     </Box>
