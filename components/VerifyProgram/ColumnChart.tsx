@@ -9,6 +9,8 @@ type PropsType = {
 };
 
 const ColumnChart = ({ distribution }: PropsType) => {
+  const { Vegetation, Water, Land, Road, Building, Unlabeled } = distribution;
+
   const options: ApexOptions = {
     chart: {
       type: 'bar',
@@ -18,6 +20,7 @@ const ColumnChart = ({ distribution }: PropsType) => {
       bar: {
         horizontal: false,
         columnWidth: '55%',
+        distributed: true,
       },
     },
     dataLabels: {
@@ -29,7 +32,7 @@ const ColumnChart = ({ distribution }: PropsType) => {
       colors: ['transparent'],
     },
     xaxis: {
-      categories: Object.keys(distribution),
+      categories: ['Vegetation', 'Water', 'Land', 'Road', 'Building', 'Unlabeled'],
     },
     yaxis: {
       labels: {
@@ -41,14 +44,26 @@ const ColumnChart = ({ distribution }: PropsType) => {
     fill: {
       opacity: 1,
     },
+    colors: [
+      '#35675F',
+      '#ACD113',
+      '#1C3238',
+      '#f48024',
+      '#13d8aa',
+      '#A5978B',
+      '#2b908f',
+      '#f9a3a4',
+      '#69d2e7',
+    ],
     legend: {
       show: false,
     },
   };
   const series = [
     {
-      name: 'Distribution',
-      data: Object.values(distribution).map((item) => +item.replace('%', '')),
+      data: [Vegetation, Water, Land, Road, Building, Unlabeled].map(
+        (item) => +item.replace('%', '')
+      ),
     },
   ];
 

@@ -9,14 +9,28 @@ type PropsType = {
 };
 
 const PieChart = ({ distribution }: PropsType) => {
+  const { Vegetation, Water, Land, Road, Building, Unlabeled } = distribution;
   const options: ApexOptions = {
     chart: {
       width: '100%',
     },
-    labels: Object.keys(distribution),
+    colors: [
+      '#35675F',
+      '#ACD113',
+      '#1C3238',
+      '#f48024',
+      '#13d8aa',
+      '#A5978B',
+      '#2b908f',
+      '#f9a3a4',
+      '#69d2e7',
+    ],
+    labels: ['Vegetation', 'Water', 'Land', 'Road', 'Building', 'Unlabeled'],
   };
 
-  const series = Object.values(distribution).map((item) => +item.replace('%', ''));
+  const series = [Vegetation, Water, Land, Road, Building, Unlabeled].map(
+    (item) => +item.replace('%', '')
+  );
 
   return (
     <Box>
