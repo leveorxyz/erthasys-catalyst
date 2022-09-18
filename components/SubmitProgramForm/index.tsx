@@ -19,6 +19,7 @@ import { uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { ref } from "firebase/storage";
 import FormInput from "../FormInputs/FormInput";
 import { db, storage } from "../../firebase";
+import { useRouter } from "next/router";
 
 interface FormData {
   instanceGoals: string;
@@ -32,6 +33,7 @@ const SubmitProgramForm = () => {
   const [isFileHoverOnDrop, setFileHoverOnDrop] = useState(false);
   const [progressPercent, setProgresspercent] = useState(0);
   const [file, setFile] = useState<File>();
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -188,8 +190,17 @@ const SubmitProgramForm = () => {
           </Box>
 
           <Flex experimental_spaceX={6} justify="end">
-            <Button background="red.400">Cancel</Button>
-            <Button background="green.400" type="submit" isLoading={isLoading}>
+            <Button background="red.400" onClick={() => router.push("/")}>
+              Cancel
+            </Button>
+            <Button
+              _hover={{
+                backgroundColor: "green.100",
+              }}
+              background="green.400"
+              type="submit"
+              isLoading={isLoading}
+            >
               Submit
             </Button>
           </Flex>

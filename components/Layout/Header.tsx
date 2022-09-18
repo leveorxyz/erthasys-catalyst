@@ -110,7 +110,14 @@ const Header = () => {
                 ) : (
                   <Link href="/login">
                     <a>
-                      <Button background="brand.100">Login</Button>
+                      <Button
+                        _hover={{
+                          backgroundColor: "green.100",
+                        }}
+                        background="brand.100"
+                      >
+                        Login
+                      </Button>
                     </a>
                   </Link>
                 )}
