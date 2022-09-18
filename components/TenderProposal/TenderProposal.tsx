@@ -54,7 +54,10 @@ const TenderProposal = () => {
           mt={[5, 0]}
           p="3"
         >
-          <SimpleGrid columns={[1, 3]} gap={6}>
+          <Box textAlign="center">
+            <Heading size="sm">All Program</Heading>
+          </Box>
+          <SimpleGrid columns={[1, 3]} gap={6} mt={6}>
             {Array.from(Array(12).keys()).map((i) => (
               <Link href="/proposal-details" key={i}>
                 <a>
