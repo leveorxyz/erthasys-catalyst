@@ -64,7 +64,7 @@ const Header = () => {
             <Box>
               <Link href="/">
                 <a>
-                  <Image src="/images/logo.png" alt="Shushashon" />
+                  <Image src="/images/logo.png" alt="Erthasys" />
                 </a>
               </Link>
             </Box>
@@ -89,7 +89,8 @@ const Header = () => {
                 </InputGroup>
 
                 <Avatar name="User" src="/images/user-avatar.png" />
-                {typeof window !== undefined && localStorage.getItem("user") ? (
+                {typeof window !== undefined ? (
+                  //  &&  localStorage.getItem("user")
                   <Button
                     background="brand.100"
                     onClick={() => {

@@ -81,7 +81,7 @@ const TenderProposal = () => {
             {programs?.map((program: Program) => (
               <Link href={`program-details/${program.id}`} key={program.id}>
                 <a>
-                  <ProposalCard program={program} />
+                  <ProposalCard program={program.data} />
                 </a>
               </Link>
             ))}

@@ -1,6 +1,6 @@
 import { Box, Flex, HStack, Text } from "@chakra-ui/react";
 import moment from "moment";
-import { Program } from "../../@types";
+import { ProgramData } from "../../@types";
 import HeadingSection from "./HeadingSection";
 
 const ProposalCard = ({ program }: any) => {
@@ -16,7 +16,7 @@ const ProposalCard = ({ program }: any) => {
         <HStack fontSize="10px">
           <HeadingSection
             label="Created at"
-            content={moment(program?.data?.created.seconds * 1000).format(
+            content={moment(program?.created?.seconds * 1000).format(
               "DD MMM YYYY hh:mm a"
             )}
           />
@@ -31,15 +31,15 @@ const ProposalCard = ({ program }: any) => {
       >
         <Flex experimental_spaceX={2} w="full">
           <Text fontWeight="semibold">Instance Goals:</Text>
-          <Text>{program?.data?.instanceGoals}</Text>
+          <Text>{program?.instanceGoals}</Text>
         </Flex>
         <Flex experimental_spaceX={2} w="full">
           <Text fontWeight="semibold">Milestones :</Text>
-          <Text>{program?.data?.milestones} </Text>
+          <Text>{program?.milestones} </Text>
         </Flex>
         <Flex experimental_spaceX={2} w="full">
           <Text fontWeight="semibold">Rewards:</Text>
-          <Text>{program?.data?.rewards} </Text>
+          <Text>{program?.rewards} </Text>
         </Flex>
       </Box>
       <Text textAlign="right" fontSize="xx-small" fontWeight="bold" mt="2">
