@@ -45,6 +45,9 @@ const Header = () => {
     console.log(user);
   }, []);
 
+  const user =
+    typeof window !== "undefined" ? localStorage.getItem("user") : null;
+
   return (
     <Box py={4} bg="white" pos="fixed" width="100%" zIndex={10}>
       <Container maxW="container.xl">
@@ -94,7 +97,7 @@ const Header = () => {
                 </InputGroup>
 
                 <Avatar name="User" src="/images/user-avatar.png" />
-                {typeof window !== undefined && localStorage.getItem("user") ? (
+                {user ? (
                   <Button
                     background="brand.100"
                     onClick={() => {
