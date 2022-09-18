@@ -95,8 +95,7 @@ const Header = () => {
                     border="none"
                   />
                 </InputGroup>
-
-                <Avatar name="User" src="/images/user-avatar.png" />
+                {user && <Avatar name="User" src="/images/user-avatar.png" />}
                 {user ? (
                   <Button
                     background="brand.100"
