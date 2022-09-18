@@ -1,4 +1,6 @@
 import { Box, Heading, HStack, Image, SimpleGrid, VStack } from '@chakra-ui/react';
+import { FaTree, FaWater, FaCircle, FaRoad } from 'react-icons/fa';
+import { GiIsland } from 'react-icons/gi';
 import { SegmentResponse } from '../../@types';
 import ColumnChart from './ColumnChart';
 import InfoItem from './InfoItem';
@@ -32,13 +34,31 @@ const AnalysisResult = ({ segmentResult }: PropsType) => {
           bottom={5}
           right={5}
           width="300"
-          bg="white"
+          bg="transparent"
+          backdropFilter="blur(20px)"
           borderRadius={10}
           p="3"
         >
-          {Object.entries(segmentResult.class_distribution).map((item, idx) => (
-            <InfoItem key={idx} item={item} />
-          ))}
+          <InfoItem
+            icon={FaTree}
+            label="Vegetation"
+            value={segmentResult.class_distribution.Vegetation}
+            color="#2d5d28"
+            bgColor="#cee4cc"
+          />
+          <InfoItem icon={FaWater} label="Water" value={segmentResult.class_distribution.Water} />
+          <InfoItem icon={GiIsland} label="Land" value={segmentResult.class_distribution.Land} />
+          <InfoItem icon={FaRoad} label="Road" value={segmentResult.class_distribution.Road} />
+          <InfoItem
+            icon={FaWater}
+            label="Building"
+            value={segmentResult.class_distribution.Building}
+          />
+          <InfoItem
+            icon={FaWater}
+            label="Unlabeled"
+            value={segmentResult.class_distribution.Unlabeled}
+          />
         </VStack>
       </Box>
 
