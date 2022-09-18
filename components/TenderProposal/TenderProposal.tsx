@@ -86,11 +86,13 @@ const TenderProposal = () => {
               </Link>
             ))}
           </SimpleGrid>
-          <Box py="10">
-            <Flex justifyContent={["center", "flex-end"]}>
-              <Pagination />
-            </Flex>
-          </Box>
+          {programs.length > 0 && (
+            <Box py="10">
+              <Flex justifyContent={["center", "flex-end"]}>
+                <Pagination />
+              </Flex>
+            </Box>
+          )}
         </Box>
       </Flex>
     </Box>
