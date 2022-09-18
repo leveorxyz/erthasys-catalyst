@@ -40,6 +40,11 @@ const Header = () => {
     // eslint-disable-next-line
   }, [mediaQuery]);
 
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    console.log(user);
+  }, []);
+
   return (
     <Box py={4} bg="white" pos="fixed" width="100%" zIndex={10}>
       <Container maxW="container.xl">
@@ -102,7 +107,7 @@ const Header = () => {
                 ) : (
                   <Link href="/login">
                     <a>
-                      <Button background="brand.100">Log in</Button>
+                      <Button background="brand.100">Login</Button>
                     </a>
                   </Link>
                 )}
