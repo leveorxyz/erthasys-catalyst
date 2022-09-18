@@ -32,7 +32,6 @@ const Login = () => {
   } = useForm<FormData>();
 
   const handleFormSubmit = async (data: FormData) => {
-    console.log(data);
     if (
       data.email === "demo-authority@gmail.com" &&
       data.password === "auth123" &&

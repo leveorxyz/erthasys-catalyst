@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -8,22 +8,22 @@ import {
   Icon,
   Input,
   SimpleGrid,
-} from '@chakra-ui/react';
-import Link from 'next/link';
-import { RiSearchFill } from 'react-icons/ri';
-import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
-import BackButton from '../BackButton/BackButton';
-import Pagination from './Pagination';
-import ProposalCard from './ProposalCard';
-import ProposalFilter from './ProposalFilter';
-import { db } from '../../firebase';
-import { Program, ProgramData } from '../../@types';
+} from "@chakra-ui/react";
+import Link from "next/link";
+import { RiSearchFill } from "react-icons/ri";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import BackButton from "../BackButton/BackButton";
+import Pagination from "./Pagination";
+import ProposalCard from "./ProposalCard";
+import ProposalFilter from "./ProposalFilter";
+import { db } from "../../firebase";
+import { Program, ProgramData } from "../../@types";
 
 const TenderProposal = () => {
   const [programs, setPrograms] = useState<Program[]>([]);
 
   useEffect(() => {
-    const q = query(collection(db, 'programs'), orderBy('created', 'desc'));
+    const q = query(collection(db, "programs"), orderBy("created", "desc"));
     onSnapshot(q, (querySnapshot) => {
       setPrograms(
         querySnapshot.docs.map((doc) => ({
@@ -33,6 +33,8 @@ const TenderProposal = () => {
       );
     });
   }, []);
+
+  console.log("programs", programs);
 
   return (
     <Box bg="white" borderRadius="5" px={5} py={10} mt={10}>
@@ -54,10 +56,10 @@ const TenderProposal = () => {
           />
         </InputGroup>
       </Flex>
-      <Flex justifyContent="space-between" flexDir={['column', 'row']} mt={5}>
+      <Flex justifyContent="space-between" flexDir={["column", "row"]} mt={5}>
         <Box
           bg="white"
-          w={['100%', '22%']}
+          w={["100%", "22%"]}
           boxShadow="0px 0px 25px rgba(0, 0, 0, 0.05)"
           borderRadius={5}
           p="2"
@@ -68,7 +70,7 @@ const TenderProposal = () => {
           bg="white"
           boxShadow="0px 0px 25px rgba(0, 0, 0, 0.05)"
           borderRadius={5}
-          w={['100%', '76%']}
+          w={["100%", "76%"]}
           mt={[5, 0]}
           p="3"
         >
@@ -76,16 +78,16 @@ const TenderProposal = () => {
             <Heading size="sm">All Program</Heading>
           </Box>
           <SimpleGrid columns={[1, 3]} gap={6} mt={6}>
-            {programs.map((program) => (
-              <Link href={`proposal-details/${program.id}`} key={program.id}>
+            {programs?.map((program: Program) => (
+              <Link href={`program-details/${program.id}`} key={program.id}>
                 <a>
-                  <ProposalCard />
+                  <ProposalCard program={program} />
                 </a>
               </Link>
             ))}
           </SimpleGrid>
           <Box py="10">
-            <Flex justifyContent={['center', 'flex-end']}>
+            <Flex justifyContent={["center", "flex-end"]}>
               <Pagination />
             </Flex>
           </Box>

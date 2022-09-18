@@ -89,17 +89,16 @@ const Header = () => {
                 </InputGroup>
 
                 <Avatar name="User" src="/images/user-avatar.png" />
-                {localStorage.getItem("user") ? (
-                  <Link href="/">
-                    <a>
-                      <Button
-                        background="brand.100"
-                        onClick={() => localStorage.clear()}
-                      >
-                        Log out
-                      </Button>
-                    </a>
-                  </Link>
+                {typeof window !== undefined && localStorage.getItem("user") ? (
+                  <Button
+                    background="brand.100"
+                    onClick={() => {
+                      localStorage.clear();
+                      router.push("/");
+                    }}
+                  >
+                    Log out
+                  </Button>
                 ) : (
                   <Link href="/login">
                     <a>
