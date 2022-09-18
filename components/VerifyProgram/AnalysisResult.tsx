@@ -15,22 +15,34 @@ const AnalysisResult = ({ segmentResult }: PropsType) => {
         Analysis Result
       </Heading>
 
-      <SimpleGrid columns={[1, 2]} mt={3} spacing={3} alignItems="center">
+      <Box position="relative">
         <Image
           src={segmentResult.prediction}
           mt={3}
           alt="Segment Result"
           borderRadius="10"
-          maxW="100%"
+          w="full"
+          maxH="500"
         />
-        <VStack w="full" gap={2}>
+
+        <VStack
+          w="full"
+          gap={2}
+          position="absolute"
+          bottom={5}
+          right={5}
+          width="300"
+          bg="white"
+          borderRadius={10}
+          p="3"
+        >
           {Object.entries(segmentResult.class_distribution).map((item, idx) => (
             <InfoItem key={idx} item={item} />
           ))}
         </VStack>
-      </SimpleGrid>
+      </Box>
 
-      <SimpleGrid columns={[1, 2]} mt={5}>
+      <SimpleGrid columns={[1, 2]} mt={5} gap={3}>
         <PieChart distribution={segmentResult.class_distribution} />
         <ColumnChart distribution={segmentResult.class_distribution} />
       </SimpleGrid>

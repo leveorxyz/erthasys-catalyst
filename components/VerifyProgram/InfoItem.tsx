@@ -29,12 +29,14 @@ const InfoItem = ({ item }: PropsType) => {
   };
 
   return (
-    <Flex justifyContent="space-between" w="full" bg="gray.100" p="3" borderRadius={5}>
-      <Text display="flex">
-        <Icon as={getIcons(item[0] as Category)} mr="1" fontSize="lg" />
-        <b>{item[0]}</b>
+    <Flex justifyContent="space-between" w="full" bg="gray.100" p="1" borderRadius={5}>
+      <Text display="flex" fontSize="sm" fontWeight="bold" alignItems="center" mr="2">
+        <Icon as={getIcons(item[0] as Category)} fontSize="sm" mr="1" />
+        {item[0]}
       </Text>
-      <b>{item[1]}</b>
+      <Text fontSize="sm" fontWeight="bold">
+        {item[1]}
+      </Text>
     </Flex>
   );
 };
