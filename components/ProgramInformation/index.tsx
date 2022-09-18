@@ -1,7 +1,10 @@
-import { Box, VStack, Text, Flex } from "@chakra-ui/react";
+import { Box, VStack, Text, Flex, Button } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 
 const ProgramInformation = ({ program }: any) => {
+  const router = useRouter();
+
   console.log(program);
   return (
     <VStack gap={3} mt={6}>
@@ -34,6 +37,26 @@ const ProgramInformation = ({ program }: any) => {
         >
           <a href="https://www.gps.ie/car-satnav-gps/">car gps</a>
         </Box> */}
+        <Flex experimental_spaceX={6} justify="end" mt={6}>
+          <Button
+            _hover={{
+              backgroundColor: "red.100",
+            }}
+            background="red.400"
+            onClick={() => router.push("/")}
+          >
+            Reject
+          </Button>
+          <Button
+            _hover={{
+              backgroundColor: "green.100",
+            }}
+            background="green.400"
+            type="submit"
+          >
+            Approve
+          </Button>
+        </Flex>
       </Box>
     </VStack>
   );
