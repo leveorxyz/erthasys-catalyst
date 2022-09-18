@@ -7,7 +7,7 @@ type PropTypes = {
   icon: IconType;
   inputType?: string;
   isInvalid?: boolean;
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
 };
 
 const FormInput = (props: PropTypes) => {

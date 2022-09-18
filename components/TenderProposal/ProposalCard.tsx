@@ -3,7 +3,7 @@ import moment from "moment";
 import { Program } from "../../@types";
 import HeadingSection from "./HeadingSection";
 
-const ProposalCard = ({ program }: Program) => {
+const ProposalCard = ({ program }: any) => {
   return (
     <Box
       boxShadow=" 0px 0px 25px rgba(0, 0, 0, 0.05)"
