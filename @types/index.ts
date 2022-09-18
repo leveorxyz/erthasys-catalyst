@@ -12,3 +12,20 @@ export interface SegmentResponse {
   prediction: string;
   success: boolean;
 }
+
+export interface Created {
+  seconds: number;
+  nanoseconds: number;
+}
+export interface ProgramData {
+  milestones: string;
+  instanceGoals: string;
+  created: Created;
+  file: string;
+  rewards: string;
+}
+
+export interface Program {
+  id: string;
+  data: ProgramData;
+}
