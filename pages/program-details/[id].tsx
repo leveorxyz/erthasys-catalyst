@@ -1,15 +1,15 @@
-import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { Box, Container, Flex, Heading } from '@chakra-ui/react';
-import Title from '../../components/Title/Title';
-import NavigationMenu from '../../components/NavigationMenu/NavigationMenu';
-import Footer from '../../components/Layout/Footer';
-import HashTags from '../../components/HashTags/HashTags';
-import ProgramInformation from '../../components/ProgramInformation';
-import { getDoc, doc } from 'firebase/firestore';
-import { db } from '../../firebase';
-import { ProgramData } from '../../@types';
+import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { Box, Container, Flex, Heading } from "@chakra-ui/react";
+import Title from "../../components/Title/Title";
+import NavigationMenu from "../../components/NavigationMenu/NavigationMenu";
+import Footer from "../../components/Layout/Footer";
+import HashTags from "../../components/HashTags/HashTags";
+import ProgramInformation from "../../components/ProgramInformation";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { ProgramData } from "../../@types";
 
 const ProposalDetails: NextPage = () => {
   const [program, setProgram] = useState<ProgramData>();
@@ -18,7 +18,7 @@ const ProposalDetails: NextPage = () => {
 
   const getDocument = async (docId: string) => {
     try {
-      const docRef = doc(db, 'programs', docId);
+      const docRef = doc(db, "programs", docId);
       const docSnap = await getDoc(docRef);
       setProgram(docSnap.data() as ProgramData);
     } catch (error) {
@@ -37,7 +37,7 @@ const ProposalDetails: NextPage = () => {
     <>
       <Title title="Program Details" />
       <Container maxW="container.xl" mt={10}>
-        <Flex gap="5" direction={['column-reverse', 'row']}>
+        <Flex gap="5" direction={["column-reverse", "row"]}>
           <Box flex="1">
             <NavigationMenu />
             <HashTags />
@@ -49,7 +49,7 @@ const ProposalDetails: NextPage = () => {
                 Program Details
               </Heading>
             </Box>
-            <ProgramInformation />
+            <ProgramInformation program={program} />
           </Box>
         </Flex>
       </Container>
