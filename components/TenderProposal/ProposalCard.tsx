@@ -1,7 +1,9 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, Text } from "@chakra-ui/react";
+import moment from "moment";
+import { ProgramData } from "../../@types";
 import HeadingSection from "./HeadingSection";
 
-const ProposalCard = () => {
+const ProposalCard = ({ program }: any) => {
   return (
     <Box
       boxShadow=" 0px 0px 25px rgba(0, 0, 0, 0.05)"
@@ -12,15 +14,11 @@ const ProposalCard = () => {
     >
       <Box bg="blackAlpha.100" borderRadius={10}>
         <HStack fontSize="10px">
-          <HeadingSection label="Ref No" content="689703" />
-          <HeadingSection label="Type" content="NCT, OTM" />
-
           <HeadingSection
-            label="Status"
-            content="Live"
-            labelColor="brand.100"
-            contentColor="red.100"
-            borderRight={false}
+            label="Created at"
+            content={moment(program?.created?.seconds * 1000).format(
+              "DD MMM YYYY hh:mm a"
+            )}
           />
         </HStack>
       </Box>
@@ -31,13 +29,18 @@ const ProposalCard = () => {
         borderRadius={10}
         mt="2"
       >
-        <Text fontSize="xs">
-          Improvement of Durjanimahal Haiders house-Bashukhali road by BC at ch.
-          00-1800m, under upazila: Rupsha,Dist: Khulna. Salvage, Ministry of
-          Local Government, Rural Development and Co-operatives, Local
-          Government Division, Local Government Engineering Department (LGED),
-          Office of the Executive Engineer, LGED, Khulna
-        </Text>
+        <Flex experimental_spaceX={2} w="full">
+          <Text fontWeight="semibold">Instance Goals:</Text>
+          <Text>{program?.instanceGoals}</Text>
+        </Flex>
+        <Flex experimental_spaceX={2} w="full">
+          <Text fontWeight="semibold">Milestones :</Text>
+          <Text>{program?.milestones} </Text>
+        </Flex>
+        <Flex experimental_spaceX={2} w="full">
+          <Text fontWeight="semibold">Rewards:</Text>
+          <Text>{program?.rewards} </Text>
+        </Flex>
       </Box>
       <Text textAlign="right" fontSize="xx-small" fontWeight="bold" mt="2">
         01 May 22 09:00 - 30 May 22 12:00
