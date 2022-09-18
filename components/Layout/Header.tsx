@@ -104,6 +104,9 @@ const Header = () => {
                       window.localStorage.clear();
                       router.push("/");
                     }}
+                    _hover={{
+                      backgroundColor: "green.100",
+                    }}
                   >
                     Log out
                   </Button>
