@@ -21,7 +21,7 @@ const InfoItem = ({ item }: PropsType) => {
         return FaCircle;
       case 'Road':
         return FaRoad;
-      case 'Building':
+      case 'Vegetation':
         return FaTree;
       default:
         return FaCircle;
