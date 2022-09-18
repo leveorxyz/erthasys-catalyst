@@ -94,7 +94,7 @@ const Header = () => {
                   <Button
                     background="brand.100"
                     onClick={() => {
-                      localStorage.clear();
+                      window.localStorage.clear();
                       router.push("/");
                     }}
                   >
