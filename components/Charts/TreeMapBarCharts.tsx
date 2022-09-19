@@ -1,9 +1,22 @@
-import { useState } from 'react';
-import { Box, Flex, Menu, MenuButton, Button, MenuList, MenuItem, Icon } from '@chakra-ui/react';
-import { RiCalendarLine, RiBarChartFill, RiLineChartFill } from 'react-icons/ri';
-import Stats from './Stats';
-import BarChart from './BarChart';
-import TreeMapChart from './TreeMapChart';
+import { useState } from "react";
+import {
+  Box,
+  Flex,
+  Menu,
+  MenuButton,
+  Button,
+  MenuList,
+  MenuItem,
+  Icon,
+} from "@chakra-ui/react";
+import {
+  RiCalendarLine,
+  RiBarChartFill,
+  RiLineChartFill,
+} from "react-icons/ri";
+import Stats from "./Stats";
+import BarChart from "./BarChart";
+import TreeMapChart from "./TreeMapChart";
 
 const TreeMapBarCharts = () => {
   const [isBarChart, setIsBarChart] = useState(false);
@@ -20,11 +33,11 @@ const TreeMapBarCharts = () => {
             color="black"
             leftIcon={<RiCalendarLine />}
           >
-            এই মাস
+            September
           </MenuButton>
           <MenuList>
-            <MenuItem>এই মাস</MenuItem>
-            <MenuItem>এই মাস</MenuItem>
+            <MenuItem>October</MenuItem>
+            <MenuItem>November</MenuItem>
           </MenuList>
         </Menu>
         <Button background="blackAlpha.100" onClick={toggleChart}>
@@ -38,11 +51,11 @@ const TreeMapBarCharts = () => {
         </Button>
       </Flex>
       <Box mt={5} width="100%">
-        <Flex direction={['column', 'row']}>
-          <Box width={['80%', '20%']}>
+        <Flex direction={["column", "row"]}>
+          <Box width={["80%", "20%"]}>
             <Stats />
           </Box>
-          <Box width={['100%', '80%']} pl={[0, 10]}>
+          <Box width={["100%", "80%"]} pl={[0, 10]}>
             {isBarChart ? <BarChart /> : <TreeMapChart />}
           </Box>
         </Flex>

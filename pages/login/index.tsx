@@ -15,6 +15,7 @@ import Title from "../../components/Title/Title";
 import { AiOutlineLock, AiOutlineMail } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import useStorage from "../../hooks/useStorage";
 
 interface FormData {
   email: string;
@@ -31,6 +32,8 @@ const Login = () => {
     formState: { errors },
   } = useForm<FormData>();
 
+  const { setItem } = useStorage();
+
   const handleFormSubmit = async (data: FormData) => {
     if (
       data.email === "demo-authority@gmail.com" &&
@@ -38,7 +41,7 @@ const Login = () => {
       data.role === "environmentalRegulatoryAuthority"
     ) {
       console.log("environmentalRegulatoryAuthority");
-      window.localStorage.setItem("user", JSON.stringify(data));
+      setItem("user", JSON.stringify(data));
       router.push("/submit-program");
     } else if (
       data.email === "demo-community@gmail.com" &&
@@ -46,7 +49,23 @@ const Login = () => {
       data.role === "localCommunity"
     ) {
       console.log("localCommunity");
-      window.localStorage.setItem("user", JSON.stringify(data));
+      setItem("user", JSON.stringify(data));
+      router.push("/all-programs");
+    } else if (
+      data.email === "demo-offsetter@gmail.com" &&
+      data.password === "Offs123" &&
+      data.role === "offsetter"
+    ) {
+      console.log("offsetter");
+      setItem("user", JSON.stringify(data));
+      router.push("/all-programs");
+    } else if (
+      data.email === "demo-verifier@gmail.com" &&
+      data.password === "Veri123" &&
+      data.role === "verifier"
+    ) {
+      console.log("Verifier");
+      setItem("user", JSON.stringify(data));
       router.push("/all-programs");
     } else {
       toast({ status: "error", description: "Wrong Credentials" });
@@ -70,6 +89,7 @@ const Login = () => {
             />
             <FormInput
               placeholder="Password"
+              inputType="password"
               icon={AiOutlineLock}
               register={register("password", { required: true })}
               isInvalid={!!errors?.password}

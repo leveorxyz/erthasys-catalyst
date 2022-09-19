@@ -1,6 +1,6 @@
-import { useEffect, useState, useMemo } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { useEffect, useState, useMemo } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import {
   Avatar,
   Box,
@@ -15,21 +15,24 @@ import {
   useMediaQuery,
   HStack,
   Container,
-} from "@chakra-ui/react";
-import { IoMenu } from "react-icons/io5";
-import { RiSearchFill } from "react-icons/ri";
-import MobileDrawer from "./MobileDrawer";
-import DashboardSidebar from "./DashboardSidebar";
+} from '@chakra-ui/react';
+import { IoMenu } from 'react-icons/io5';
+import { RiSearchFill } from 'react-icons/ri';
+import MobileDrawer from './MobileDrawer';
+import DashboardSidebar from './DashboardSidebar';
+import ConnectButton from '../ConnectButton/ConnectButton';
+import useStorage from '../../hooks/useStorage';
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [mediaQuery] = useMediaQuery("(max-width: 991px)");
+  const [mediaQuery] = useMediaQuery('(max-width: 991px)');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const sidebar = useDisclosure();
   const router = useRouter();
+  const { getItem, removeItem } = useStorage();
 
   const isDashboard = useMemo(() => {
-    const paths = ["/dashboard", "/proposal-details"];
+    const paths = ['/dashboard', '/proposal-details'];
     return paths.includes(router.pathname);
   }, [router.pathname]);
 
@@ -41,12 +44,11 @@ const Header = () => {
   }, [mediaQuery]);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem('user');
     console.log(user);
   }, []);
 
-  const user =
-    typeof window !== "undefined" ? localStorage.getItem("user") : null;
+  const user = getItem('user');
 
   return (
     <Box py={4} bg="white" pos="fixed" width="100%" zIndex={10}>
@@ -69,6 +71,7 @@ const Header = () => {
                 <IoMenu size="30" />
               </Button>
             )}
+
             <Box>
               <Link href="/">
                 <a>
@@ -81,11 +84,7 @@ const Header = () => {
               <HStack gap={10}>
                 <InputGroup width="400px">
                   <InputRightElement pointerEvents="none">
-                    <Icon
-                      as={RiSearchFill}
-                      color="dark.100"
-                      fontWeight="bold"
-                    />
+                    <Icon as={RiSearchFill} color="dark.100" fontWeight="bold" />
                   </InputRightElement>
                   <Input
                     type="search"
@@ -96,15 +95,16 @@ const Header = () => {
                   />
                 </InputGroup>
                 {user && <Avatar name="User" src="/images/user-avatar.png" />}
+                {user && <ConnectButton />}
                 {user ? (
                   <Button
                     background="brand.100"
                     onClick={() => {
-                      window.localStorage.clear();
-                      router.push("/");
+                      removeItem('user');
+                      router.push('/');
                     }}
                     _hover={{
-                      backgroundColor: "green.100",
+                      backgroundColor: 'green.100',
                     }}
                   >
                     Log out
@@ -114,7 +114,7 @@ const Header = () => {
                     <a>
                       <Button
                         _hover={{
-                          backgroundColor: "green.100",
+                          backgroundColor: 'green.100',
                         }}
                         background="brand.100"
                       >
@@ -131,11 +131,7 @@ const Header = () => {
               </Button>
             )}
           </Flex>
-          <MobileDrawer
-            onClose={onClose}
-            isOpen={isOpen}
-            isDashboard={isDashboard}
-          />
+          <MobileDrawer onClose={onClose} isOpen={isOpen} isDashboard={isDashboard} />
           <DashboardSidebar onClose={sidebar.onClose} isOpen={sidebar.isOpen} />
         </Box>
       </Container>

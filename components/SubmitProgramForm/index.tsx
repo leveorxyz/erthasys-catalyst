@@ -9,22 +9,24 @@ import {
   useBoolean,
   useToast,
   Progress,
-} from "@chakra-ui/react";
-import React, { useState } from "react";
-import { RiSearchFill, RiAwardFill, RiStarFill } from "react-icons/ri";
-import { useForm } from "react-hook-form";
-import { FaFileUpload } from "react-icons/fa";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
-import { uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { ref } from "firebase/storage";
-import FormInput from "../FormInputs/FormInput";
-import { db, storage } from "../../firebase";
-import { useRouter } from "next/router";
+  Select,
+} from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { RiSearchFill, RiAwardFill, RiStarFill } from 'react-icons/ri';
+import { useForm } from 'react-hook-form';
+import { FaFileUpload } from 'react-icons/fa';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { ref } from 'firebase/storage';
+import FormInput from '../FormInputs/FormInput';
+import { db, storage } from '../../firebase';
+import { useRouter } from 'next/router';
 
 interface FormData {
   instanceGoals: string;
-  milestones: string;
-  rewards: string;
+  pollutant: string;
+  initialAmount: string;
+  targetAmount: string;
   attachment: string;
 }
 
@@ -51,20 +53,18 @@ const SubmitProgramForm = () => {
       const uploadTask = uploadBytesResumable(storageRef, file);
 
       uploadTask.on(
-        "state_changed",
+        'state_changed',
         (snapshot) => {
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
+          const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
           setProgresspercent(progress);
         },
         (error) => {
-          toast({ status: "error", description: JSON.stringify(error) });
+          toast({ status: 'error', description: JSON.stringify(error) });
           setIsLoading.off();
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await addDoc(collection(db, "programs"), {
+            await addDoc(collection(db, 'programs'), {
               ...rest,
               file: downloadURL,
               created: Timestamp.now(),
@@ -75,15 +75,15 @@ const SubmitProgramForm = () => {
             setIsLoading.off();
 
             toast({
-              status: "success",
-              description: "Proposal created successfully!",
+              status: 'success',
+              description: 'Proposal created successfully!',
             });
           });
         }
       );
     } catch (err) {
       setIsLoading.off();
-      toast({ status: "error", description: JSON.stringify(err) });
+      toast({ status: 'error', description: JSON.stringify(err) });
     }
   };
 
@@ -97,20 +97,40 @@ const SubmitProgramForm = () => {
           <FormInput
             placeholder="Instance Goals"
             icon={RiSearchFill}
-            register={register("instanceGoals", { required: true })}
+            register={register('instanceGoals', { required: true })}
             isInvalid={!!errors?.instanceGoals}
           />
+          <Select
+            placeholder="Select Pollutant"
+            focusBorderColor="brand.100"
+            bg="offwhite.100"
+            borderWidth="1px"
+            borderColor="gray.400"
+            _placeholder={{ color: 'gray.500' }}
+            isInvalid={!!errors?.pollutant}
+            color="gray.500"
+            {...register('pollutant', { required: true })}
+          >
+            <option value="Carbon" color="gray">
+              Carbon
+            </option>
+            <option value="Air">Air</option>
+            <option value="Gas">Gas</option>
+            <option value="Soil">Soil</option>
+          </Select>
           <FormInput
-            placeholder="Milestones"
+            inputType="number"
+            placeholder="Initial Pollutant Amount"
             icon={RiStarFill}
-            register={register("milestones", { required: true })}
-            isInvalid={!!errors?.milestones}
+            register={register('initialAmount', { required: true })}
+            isInvalid={!!errors?.initialAmount}
           />
           <FormInput
-            placeholder="Rewards"
+            inputType="number"
+            placeholder="Target Pollutant Amount"
             icon={RiAwardFill}
-            register={register("rewards", { required: true })}
-            isInvalid={!!errors?.rewards}
+            register={register('targetAmount', { required: true })}
+            isInvalid={!!errors?.targetAmount}
           />
 
           <Box
@@ -141,9 +161,9 @@ const SubmitProgramForm = () => {
               border="none"
               focusBorderColor="brand.100"
               bg="offwhite.100"
-              _placeholder={{ color: "gray.500" }}
+              _placeholder={{ color: 'gray.500' }}
               type="file"
-              {...register("attachment", { required: true })}
+              {...register('attachment', { required: true })}
               onChange={(e: any) => {
                 setFile(e.target.files[0] ?? undefined);
               }}
@@ -152,15 +172,15 @@ const SubmitProgramForm = () => {
               <Box
                 border="gray.400"
                 bg="offwhite.100"
-                _placeholder={{ color: "gray.500" }}
-                borderStyle={isFileHoverOnDrop ? "dashed" : "solid"}
+                _placeholder={{ color: 'gray.500' }}
+                borderStyle={isFileHoverOnDrop ? 'dashed' : 'solid'}
                 pr={2}
                 pl={3}
                 py={2}
                 borderRadius={6}
                 color="gray.500"
-                borderWidth={errors?.attachment ? "2px" : "1px"}
-                borderColor={errors?.attachment ? "red" : "gray.400"}
+                borderWidth={errors?.attachment ? '2px' : '1px'}
+                borderColor={errors?.attachment ? 'red' : 'gray.400'}
               >
                 {file ? (
                   <Flex w="full" justify="space-between" alignItems="center">
@@ -170,8 +190,7 @@ const SubmitProgramForm = () => {
                 ) : (
                   <Flex w="full" justify="space-between" alignItems="center">
                     <Text>
-                      Drop your document here, or{" "}
-                      <span color="#fff5">Browse</span>
+                      Drop your document here, or <span color="#fff5">Browse</span>
                     </Text>
                     <FaFileUpload />
                   </Flex>
@@ -180,22 +199,17 @@ const SubmitProgramForm = () => {
             </label>
 
             {!!progressPercent && (
-              <Progress
-                colorScheme="green"
-                size="sm"
-                value={progressPercent}
-                mt={3}
-              />
+              <Progress colorScheme="green" size="sm" value={progressPercent} mt={3} />
             )}
           </Box>
 
           <Flex experimental_spaceX={6} justify="end">
-            <Button background="red.400" onClick={() => router.push("/")}>
+            <Button background="red.400" onClick={() => router.push('/')}>
               Cancel
             </Button>
             <Button
               _hover={{
-                backgroundColor: "green.100",
+                backgroundColor: 'green.100',
               }}
               background="green.400"
               type="submit"
