@@ -1,13 +1,16 @@
-import { Box, VStack, Text, Flex, Button } from "@chakra-ui/react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
-import { AiFillEye } from "react-icons/ai";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { VStack, Text, Flex, Button } from '@chakra-ui/react';
+import { AiFillEye } from 'react-icons/ai';
+import { ProgramData } from '../../@types';
 
-const ProgramInformation = ({ program }: any) => {
+const ProgramInformation = ({ program }: { program?: ProgramData }) => {
   const router = useRouter();
 
-  console.log(program);
+  const handleVerify = () => {
+    console.log('Verifying');
+  };
+
   return (
     <VStack gap={3} mt={6}>
       <Flex experimental_spaceX={2} w="full">
@@ -15,12 +18,16 @@ const ProgramInformation = ({ program }: any) => {
         <Text>{program?.instanceGoals}</Text>
       </Flex>
       <Flex experimental_spaceX={2} w="full">
-        <Text fontWeight="semibold">Milestones :</Text>
-        <Text>{program?.milestones} </Text>
+        <Text fontWeight="semibold">Pollutant :</Text>
+        <Text>{program?.pollutant} </Text>
       </Flex>
       <Flex experimental_spaceX={2} w="full">
-        <Text fontWeight="semibold">Rewards:</Text>
-        <Text>{program?.rewards}</Text>
+        <Text fontWeight="semibold">Initial pollutant amount:</Text>
+        <Text>{program?.initialAmount} </Text>
+      </Flex>
+      <Flex experimental_spaceX={2} w="full">
+        <Text fontWeight="semibold">Target pollutant amount:</Text>
+        <Text>{program?.targetAmount} </Text>
       </Flex>
       <Flex experimental_spaceX={2} w="full">
         <Text fontWeight="semibold">File:</Text>
@@ -33,19 +40,14 @@ const ProgramInformation = ({ program }: any) => {
 
             <Link href={program?.file}>
               <a target="_blank">
-                {" "}
+                {' '}
                 <AiFillEye />
               </a>
             </Link>
           </Flex>
         )}
       </Flex>
-      <object
-        data={program?.file}
-        type="application/pdf"
-        width="100%"
-        height="500px"
-      >
+      <object data={program?.file} type="application/pdf" width="100%" height="500px">
         <iframe
           src={`https://docs.google.com/viewer?url=${program?.file}&embedded=true`}
           title="file"
@@ -57,20 +59,19 @@ const ProgramInformation = ({ program }: any) => {
       <Flex experimental_spaceX={6} justify="end" mt={6}>
         <Button
           _hover={{
-            backgroundColor: "red.100",
+            backgroundColor: 'red.100',
           }}
           background="red.400"
-          onClick={() => router.push("/")}
+          onClick={() => router.push('/')}
         >
           Reject
         </Button>
         <Button
           _hover={{
-            backgroundColor: "green.100",
+            backgroundColor: 'green.100',
           }}
-          onClick={() => router.push("/all-programs")}
           background="green.400"
-          type="submit"
+          onClick={handleVerify}
         >
           Verify
         </Button>
