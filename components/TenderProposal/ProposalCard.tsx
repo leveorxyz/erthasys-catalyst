@@ -29,10 +29,14 @@ const ProposalCard = ({ program }: any) => {
         borderRadius={10}
         mt="2"
       >
-        <Flex experimental_spaceX={2} w="full">
-          <Text fontWeight="semibold">Instance Goals:</Text>
-          <Text>{program?.instanceGoals}</Text>
-        </Flex>
+        <Box w="full">
+          <Text fontWeight="semibold" whiteSpace="nowrap">
+            Instance Goals:
+          </Text>
+          <Text color="gray.600" fontSize="small">
+            {program?.instanceGoals}
+          </Text>
+        </Box>
         <Flex experimental_spaceX={2} w="full">
           <Text fontWeight="semibold">Milestones :</Text>
           <Text>{program?.milestones} </Text>
@@ -42,9 +46,6 @@ const ProposalCard = ({ program }: any) => {
           <Text>{program?.rewards} </Text>
         </Flex>
       </Box>
-      <Text textAlign="right" fontSize="xx-small" fontWeight="bold" mt="2">
-        01 May 22 09:00 - 30 May 22 12:00
-      </Text>
     </Box>
   );
 };
