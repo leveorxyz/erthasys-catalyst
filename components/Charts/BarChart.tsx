@@ -1,18 +1,18 @@
-import dynamic from 'next/dynamic';
-import { Box } from '@chakra-ui/react';
-import { ApexOptions } from 'apexcharts';
-const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
+import dynamic from "next/dynamic";
+import { Box } from "@chakra-ui/react";
+import { ApexOptions } from "apexcharts";
+const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const BarChart = () => {
   const options: ApexOptions = {
     chart: {
-      type: 'bar',
-      width: '100%',
+      type: "bar",
+      width: "100%",
     },
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: '55%',
+        columnWidth: "55%",
       },
     },
     dataLabels: {
@@ -21,12 +21,12 @@ const BarChart = () => {
     stroke: {
       show: true,
       width: 2,
-      colors: ['transparent'],
+      colors: ["transparent"],
     },
     xaxis: {
-      categories: ['জানু', 'ফেব্রু', 'মার্চ', 'এপ্রিল', 'মে', 'জুন'],
+      categories: ["January", "February", "March", "April", "May", "June"],
     },
-    colors: ['#D32D42', '#3E6B52'],
+    colors: ["#D32D42", "#3E6B52"],
     fill: {
       opacity: 1,
     },
@@ -36,18 +36,18 @@ const BarChart = () => {
     tooltip: {
       y: {
         formatter: function (val) {
-          return '$ ' + val;
+          return "$ " + val;
         },
       },
     },
   };
   const series = [
     {
-      name: 'Net Profit',
+      name: "Total Carbon Offset",
       data: [44, 55, 57, 56, 61, 67],
     },
     {
-      name: 'Revenue',
+      name: "Total Carbon Emitted",
       data: [76, 85, 101, 98, 87, 105],
     },
   ];

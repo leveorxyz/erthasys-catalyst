@@ -1,7 +1,7 @@
-import dynamic from 'next/dynamic';
-import { Box } from '@chakra-ui/react';
-import { ApexOptions } from 'apexcharts';
-const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
+import dynamic from "next/dynamic";
+import { Box } from "@chakra-ui/react";
+import { ApexOptions } from "apexcharts";
+const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const TreeMapChart = () => {
   const options: ApexOptions = {
@@ -10,7 +10,7 @@ const TreeMapChart = () => {
     },
     chart: {
       height: 350,
-      type: 'treemap',
+      type: "treemap",
       toolbar: {
         show: false,
       },
@@ -18,7 +18,7 @@ const TreeMapChart = () => {
     dataLabels: {
       enabled: true,
       style: {
-        fontSize: '12px',
+        fontSize: "12px",
       },
       offsetY: -4,
     },
@@ -33,19 +33,24 @@ const TreeMapChart = () => {
         colorScale: {
           ranges: [
             {
-              from: -6,
-              to: 0,
-              color: '#D32D42',
+              from: 20,
+              to: 34,
+              color: "#6B8E23",
             },
             {
-              from: 0.001,
-              to: 3,
-              color: '#3E6B52',
+              from: 51,
+              to: 60,
+              color: "#E5B132",
             },
             {
-              from: 3.001,
-              to: 6,
-              color: '#E5B132',
+              from: 1,
+              to: 10,
+              color: "#3E6B52",
+            },
+            {
+              from: 11,
+              to: 19,
+              color: "#D32D42",
             },
           ],
         },
@@ -57,68 +62,28 @@ const TreeMapChart = () => {
     {
       data: [
         {
-          x: 'Procurement Plan',
-          y: 4,
+          x: "Vegetation",
+          y: 31.89,
         },
         {
-          x: '',
-          y: 0.4,
+          x: "Water",
+          y: 0.01,
         },
         {
-          x: '',
-          y: -1.4,
+          x: "Land",
+          y: 51.27,
         },
         {
-          x: 'Tender Examination',
-          y: 3,
+          x: "Road",
+          y: 4.68,
         },
         {
-          x: '',
-          y: -0.3,
+          x: "Building",
+          y: 12.15,
         },
         {
-          x: 'Tender Issue, Receipt',
-          y: 6,
-        },
-        {
-          x: '',
-          y: -2.3,
-        },
-        {
-          x: 'Tender Approval',
-          y: 2.1,
-        },
-        {
-          x: '',
-          y: 0.3,
-        },
-        {
-          x: '',
-          y: 0.12,
-        },
-        {
-          x: '',
-          y: 0.18,
-        },
-        {
-          x: '',
-          y: 2.18,
-        },
-        {
-          x: '',
-          y: 2.18,
-        },
-        {
-          x: 'Tender Preparation',
-          y: -2.31,
-        },
-        {
-          x: '',
-          y: 3.98,
-        },
-        {
-          x: 'Procurement Plan',
-          y: 1.67,
+          x: "Unlabeled",
+          y: 0,
         },
       ],
     },
@@ -126,7 +91,12 @@ const TreeMapChart = () => {
 
   return (
     <Box>
-      <ApexChart options={options} series={series} type="treemap" height="200" />
+      <ApexChart
+        options={options}
+        series={series}
+        type="treemap"
+        height="200"
+      />
     </Box>
   );
 };
