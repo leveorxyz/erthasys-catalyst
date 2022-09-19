@@ -1,9 +1,9 @@
-import { InjectedConnector } from 'wagmi/connectors/injected';
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { Button, Text, HStack, Avatar, useToast } from '@chakra-ui/react';
 
 const ConnectButton = () => {
-  const { connectAsync } = useConnect({ connector: new InjectedConnector() });
+  const { connectAsync } = useConnect({ connector: new MetaMaskConnector() });
   const { disconnectAsync } = useDisconnect();
   const { isConnected, address } = useAccount();
   const toast = useToast();
