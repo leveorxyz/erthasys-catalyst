@@ -18,7 +18,8 @@ const ProgramInformation = ({ program }: { program?: ProgramData }) => {
   const { getItem } = useStorage();
 
   const user = getItem('user');
-  const parsedUser = useMemo(() => JSON.parse(user), [user]);
+
+  const parsedUser = useMemo(() => (user ? JSON.parse(user) : undefined), [user]);
 
   // const { config } = usePrepareContractWrite({
   //   addressOrName: '0x9d16E59D5cBB0c46A88E63b2f39595834b30D596',
