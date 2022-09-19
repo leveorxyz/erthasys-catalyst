@@ -8,13 +8,14 @@ import {
   Heading,
   toast,
   useToast,
-} from "@chakra-ui/react";
-import React from "react";
-import FormInput from "../../components/FormInputs/FormInput";
-import Title from "../../components/Title/Title";
-import { AiOutlineLock, AiOutlineMail } from "react-icons/ai";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
+} from '@chakra-ui/react';
+import React from 'react';
+import FormInput from '../../components/FormInputs/FormInput';
+import Title from '../../components/Title/Title';
+import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import useStorage from '../../hooks/useStorage';
 
 interface FormData {
   email: string;
@@ -31,25 +32,43 @@ const Login = () => {
     formState: { errors },
   } = useForm<FormData>();
 
+  const { setItem } = useStorage();
+
   const handleFormSubmit = async (data: FormData) => {
     if (
-      data.email === "demo-authority@gmail.com" &&
-      data.password === "auth123" &&
-      data.role === "environmentalRegulatoryAuthority"
+      data.email === 'demo-authority@gmail.com' &&
+      data.password === 'auth123' &&
+      data.role === 'environmentalRegulatoryAuthority'
     ) {
-      console.log("environmentalRegulatoryAuthority");
-      window.localStorage.setItem("user", JSON.stringify(data));
-      router.push("/submit-program");
+      console.log('environmentalRegulatoryAuthority');
+      setItem('user', JSON.stringify(data));
+      router.push('/submit-program');
     } else if (
-      data.email === "demo-community@gmail.com" &&
-      data.password === "comm123" &&
-      data.role === "localCommunity"
+      data.email === 'demo-community@gmail.com' &&
+      data.password === 'comm123' &&
+      data.role === 'localCommunity'
     ) {
-      console.log("localCommunity");
-      window.localStorage.setItem("user", JSON.stringify(data));
-      router.push("/all-programs");
+      console.log('localCommunity');
+      setItem('user', JSON.stringify(data));
+      router.push('/all-programs');
+    } else if (
+      data.email === 'demo-offsetter@gmail.com' &&
+      data.password === 'Offs123' &&
+      data.role === 'offsetter'
+    ) {
+      console.log('offsetter');
+      setItem('user', JSON.stringify(data));
+      router.push('/all-programs');
+    } else if (
+      data.email === 'demo-verifier@gmail.com' &&
+      data.password === 'Veri123' &&
+      data.role === 'verifier'
+    ) {
+      console.log('Verifier');
+      setItem('user', JSON.stringify(data));
+      router.push('/all-programs');
     } else {
-      toast({ status: "error", description: "Wrong Credentials" });
+      toast({ status: 'error', description: 'Wrong Credentials' });
     }
   };
 
@@ -65,19 +84,19 @@ const Login = () => {
             <FormInput
               placeholder="Email"
               icon={AiOutlineMail}
-              register={register("email", { required: true })}
+              register={register('email', { required: true })}
               isInvalid={!!errors?.email}
             />
             <FormInput
               placeholder="Password"
               icon={AiOutlineLock}
-              register={register("password", { required: true })}
+              register={register('password', { required: true })}
               isInvalid={!!errors?.password}
             />
             <Select
               placeholder="Select role"
-              {...register("role", { required: true })}
-              _placeholder={{ color: "gray.500" }}
+              {...register('role', { required: true })}
+              _placeholder={{ color: 'gray.500' }}
               isInvalid={!!errors?.role}
             >
               <option value="environmentalRegulatoryAuthority">

@@ -18,11 +18,12 @@ export interface Created {
   nanoseconds: number;
 }
 export interface ProgramData {
-  milestones: string;
   instanceGoals: string;
-  created: Created;
+  pollutant: string;
+  initialAmount: string;
+  targetAmount: string;
   file: string;
-  rewards: string;
+  created: Created;
 }
 
 export interface Program {
