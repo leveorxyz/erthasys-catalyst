@@ -6,7 +6,7 @@ import TenderProposal from "../../components/TenderProposal/TenderProposal";
 const Procurements: NextPage = () => {
   return (
     <>
-      <Title title="Procurements" />
+      <Title title="All Programs" />
       <Container maxW="container.2xl" mt={10}>
         <TenderProposal />
       </Container>
