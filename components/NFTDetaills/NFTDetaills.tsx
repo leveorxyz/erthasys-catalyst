@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Image } from '@chakra-ui/react';
+import { Box, Flex, Text, Image, Button } from '@chakra-ui/react';
 
 const NFTDetaills = () => {
   return (
@@ -17,6 +17,15 @@ const NFTDetaills = () => {
         width="300px"
         borderRadius={5}
       />
+      <a
+        href="https://ipfs.io/ipfs/bafyreiesxs24w5xnia7g2ksfovec3hsb2qmlnkfvhvhg3eyjf6yfzwzw74/metadata.json"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <Button _hover={{ backgroundColor: 'green.100' }} mt="2">
+          View on IPFS
+        </Button>
+      </a>
     </Box>
   );
 };
