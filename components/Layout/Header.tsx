@@ -21,6 +21,7 @@ import { RiSearchFill } from 'react-icons/ri';
 import MobileDrawer from './MobileDrawer';
 import DashboardSidebar from './DashboardSidebar';
 import ConnectButton from '../ConnectButton/ConnectButton';
+import useStorage from '../../hooks/useStorage';
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -28,6 +29,7 @@ const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const sidebar = useDisclosure();
   const router = useRouter();
+  const { getItem, removeItem } = useStorage();
 
   const isDashboard = useMemo(() => {
     const paths = ['/dashboard', '/proposal-details'];
@@ -46,7 +48,7 @@ const Header = () => {
     console.log(user);
   }, []);
 
-  const user = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+  const user = getItem('user');
 
   return (
     <Box py={4} bg="white" pos="fixed" width="100%" zIndex={10}>
@@ -69,6 +71,7 @@ const Header = () => {
                 <IoMenu size="30" />
               </Button>
             )}
+
             <Box>
               <Link href="/">
                 <a>
@@ -92,11 +95,12 @@ const Header = () => {
                   />
                 </InputGroup>
                 {user && <Avatar name="User" src="/images/user-avatar.png" />}
+                {user && <ConnectButton />}
                 {user ? (
                   <Button
                     background="brand.100"
                     onClick={() => {
-                      window.localStorage.clear();
+                      removeItem('user');
                       router.push('/');
                     }}
                     _hover={{
@@ -119,7 +123,6 @@ const Header = () => {
                     </a>
                   </Link>
                 )}
-                <ConnectButton />
               </HStack>
             )}
             {isMobile && (
