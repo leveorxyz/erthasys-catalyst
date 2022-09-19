@@ -13,17 +13,15 @@ import FormInput from '../../components/FormInputs/FormInput';
 import Title from '../../components/Title/Title';
 import { FaPencilAlt, FaFileImage } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
-// import { useRouter } from 'next/router';
-// import { NFTStorage, File } from 'nft.storage';
-// import useStorage from '../../hooks/useStorage';
+import { NFTStorage } from 'nft.storage';
 
 interface FormData {
   nftName: string;
   nftDescription: string;
-  nftImage: string;
+  nftImage: FileList;
 }
 
-// const client = new NFTStorage({ token: `${NFT_KEY}` });
+const client = new NFTStorage({ token: `${process.env.NEXT_PUBLIC_NFT_KEY}` });
 
 const SubmitNFT = () => {
   const [loading, setLoading] = useBoolean(false);
@@ -36,13 +34,25 @@ const SubmitNFT = () => {
   } = useForm<FormData>();
 
   const handleFormSubmit = async (data: FormData) => {
-    setLoading.on();
+    try {
+      const { nftName, nftImage, nftDescription } = data;
 
-    setTimeout(() => {
+      setLoading.on();
+
+      await client.store({
+        name: nftName,
+        description: nftDescription,
+        image: nftImage[0],
+      });
+
+      setTimeout(() => {
+        setLoading.off();
+        reset();
+        toast({ status: 'success', description: 'Success!' });
+      }, 5000);
+    } catch (error) {
       setLoading.off();
-      reset();
-      toast({ status: 'success', description: 'Success!' });
-    }, 5000);
+    }
   };
 
   return (
