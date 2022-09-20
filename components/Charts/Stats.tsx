@@ -9,7 +9,7 @@ import {
 
 const Stats = () => {
   return (
-    <Box>
+    <Box ml={2}>
       <Stat>
         <StatNumber fontSize={30}>15,000</StatNumber>
         <StatHelpText>
