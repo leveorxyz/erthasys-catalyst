@@ -7,7 +7,7 @@ const Procurements: NextPage = () => {
   return (
     <>
       <Title title="All Programs" />
-      <Container maxW="container.2xl" mt={10}>
+      <Container maxW="container.xl" mt={10}>
         <TenderProposal />
       </Container>
     </>
