@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { VStack, Text, Flex, Button, useToast, useBoolean } from '@chakra-ui/react';
 import { AiFillEye } from 'react-icons/ai';
-// import { useContractWrite, usePrepareContractWrite, useAccount } from 'wagmi';
+import { useContractWrite, usePrepareContractWrite, useAccount } from 'wagmi';
 import { ProgramData } from '../../@types';
-// import ProtocolABI from '../../config/abis/Protocol.json';
+import demoABI from '../../config/abis/demoABI.json';
 import useStorage from '../../hooks/useStorage';
 import { useMemo } from 'react';
 import SubmitNFT from '../SubmitNFT/SubmitNFT';
@@ -13,7 +13,7 @@ import NFTDetaills from '../NFTDetaills/NFTDetaills';
 const ProgramInformation = ({ program }: { program?: ProgramData }) => {
   const [loading, setLoading] = useBoolean();
   const router = useRouter();
-  // const { address } = useAccount();
+  const { address, isConnected } = useAccount();
   const toast = useToast();
   const { getItem } = useStorage();
 
@@ -21,45 +21,78 @@ const ProgramInformation = ({ program }: { program?: ProgramData }) => {
 
   const parsedUser = useMemo(() => (user ? JSON.parse(user) : undefined), [user]);
 
-  // const { config } = usePrepareContractWrite({
-  //   addressOrName: '0x9d16E59D5cBB0c46A88E63b2f39595834b30D596',
-  //   contractInterface: ProtocolABI,
-  //   functionName: 'addNewProject',
-  //   args: [address, 0x00, [['Carbon', [595], [205]]]],
-  // });
-  // const { data, isSuccess, write } = useContractWrite(config);
+  const { config } = usePrepareContractWrite({
+    addressOrName: '0x9F12165d3b069Fb807b6b649c5795bEc4426C594',
+    contractInterface: demoABI,
+    functionName: 'test',
+  });
+  const { writeAsync } = useContractWrite(config);
 
-  const handleVerifierSubmit = () => {
-    setLoading.on();
-    setTimeout(() => {
-      setLoading.off();
+  const handleVerifierSubmit = async () => {
+    if (!(isConnected && address)) {
       toast({
-        status: 'success',
-        description: (
-          <p>
-            Successfully ES-C minted for Offsetter <br />
-            Successfully ES NFT Minted for Emitter&apos;s marketplace
-          </p>
-        ),
+        status: 'error',
+        description: 'Please connect your wallet.',
         duration: 15000,
       });
-    }, 3000);
+      return;
+    }
+    try {
+      setLoading.on();
+      const res = await writeAsync?.();
+
+      if (res?.hash) {
+        setLoading.off();
+        toast({
+          status: 'success',
+          description: (
+            <p>
+              Successfully ES-C minted for Offsetter <br />
+              Successfully ES NFT Minted for Emitter&apos;s marketplace
+            </p>
+          ),
+          duration: 15000,
+        });
+      }
+    } catch (error) {
+    } finally {
+      setLoading.off();
+    }
+  };
+
+  const handleMint = async () => {
+    if (!(isConnected && address)) {
+      toast({
+        status: 'error',
+        description: 'Please connect your wallet.',
+        duration: 15000,
+      });
+      return;
+    }
+    try {
+      setLoading.on();
+      const res = await writeAsync?.();
+
+      if (res?.hash) {
+        setLoading.off();
+        toast({
+          status: 'success',
+          description: 'Successfully minted',
+        });
+      }
+    } catch (error) {
+    } finally {
+      setLoading.off();
+    }
   };
 
   const handleVerify = async () => {
-    console.log('Verifying');
-    // write?.();
-
     switch (parsedUser?.role) {
       case 'verifier':
         handleVerifierSubmit();
         break;
       default:
-        setLoading.on();
-        setTimeout(() => {
-          setLoading.off();
-          toast({ status: 'success', description: 'Successfully minted' });
-        }, 3000);
+        handleMint();
     }
   };
 
